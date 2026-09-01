@@ -1,12 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Tests\Unit;
+namespace Bambamboole\CloudflareMail\Tests\Unit;
 
+use Bambamboole\CloudflareMail\Cloudflare\Client;
+use Bambamboole\CloudflareMail\Cloudflare\PayloadBuilder;
+use Bambamboole\CloudflareMail\Transport\CloudflareTransport;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use Junges\CloudflareMail\Cloudflare\Client;
-use Junges\CloudflareMail\Cloudflare\PayloadBuilder;
-use Junges\CloudflareMail\Transport\CloudflareTransport;
 use Symfony\Component\Mailer\Exception\TransportException;
+use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Part\DataPart;
 
@@ -14,7 +17,7 @@ function transport(): CloudflareTransport
 {
     return new CloudflareTransport(
         client: new Client('acct', 'tok', 'https://api.cloudflare.com/client/v4', 10),
-        payloadBuilder: new PayloadBuilder(),
+        payloadBuilder: new PayloadBuilder,
     );
 }
 
@@ -37,7 +40,7 @@ it('delegates a happy-path send to the API client', function (): void {
     transport()->send($email);
 
     Http::assertSentCount(1);
-    Http::assertSent(fn ($request) => $request['subject'] === 'Hi' && $request['text'] === 'Body');
+    Http::assertSent(fn (Request $request): bool => $request['subject'] === 'Hi' && $request['text'] === 'Body');
 });
 
 it('rethrows API failures as TransportException', function (): void {
@@ -54,7 +57,7 @@ it('rethrows API failures as TransportException', function (): void {
         ->subject('s')
         ->text('t');
 
-    expect(fn () => transport()->send($email))->toThrow(TransportException::class, 'invalid email');
+    expect(fn (): ?SentMessage => transport()->send($email))->toThrow(TransportException::class, 'invalid email');
 });
 
 it('rethrows an inline attachment rejection as TransportException', function (): void {
@@ -67,7 +70,7 @@ it('rethrows an inline attachment rejection as TransportException', function ():
         ->html('<img src="cid:logo">')
         ->addPart(new DataPart('img-bytes', 'logo.png', 'image/png')->asInline());
 
-    expect(fn () => transport()->send($email))
+    expect(fn (): ?SentMessage => transport()->send($email))
         ->toThrow(TransportException::class, 'does not support inline attachments');
 
     Http::assertNothingSent();

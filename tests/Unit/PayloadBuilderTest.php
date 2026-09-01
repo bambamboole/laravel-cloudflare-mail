@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Tests\Unit;
+namespace Bambamboole\CloudflareMail\Tests\Unit;
 
-use Junges\CloudflareMail\Cloudflare\PayloadBuilder;
-use Junges\CloudflareMail\Exceptions\CloudflareTransportException;
+use Bambamboole\CloudflareMail\Cloudflare\PayloadBuilder;
+use Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
@@ -106,13 +107,12 @@ it('base64-encodes attachments with filename, type, and attachment disposition',
 
     $payload = buildPayload($email);
 
-    expect($payload['attachments'])->toHaveCount(1);
-    expect($payload['attachments'][0])->toMatchArray([
+    expect($payload['attachments'])->toBe([[
         'content' => base64_encode('binary-bytes'),
         'filename' => 'report.pdf',
         'type' => 'application/pdf',
         'disposition' => 'attachment',
-    ]);
+    ]]);
 });
 
 it('rejects inline attachments since Cloudflare does not support it', function (): void {
@@ -125,7 +125,7 @@ it('rejects inline attachments since Cloudflare does not support it', function (
         ->html('<img src="cid:logo">')
         ->addPart($inline);
 
-    expect(fn () => buildPayload($email))
+    expect(fn (): array => buildPayload($email))
         ->toThrow(CloudflareTransportException::class, 'does not support inline attachments');
 });
 

@@ -1,0 +1,8 @@
+laravel: '@testbench'
+
+env:
+  APP_ENV: local
+
+providers:
+  - Bambamboole\CloudflareMail\CloudflareMailServiceProvider
+

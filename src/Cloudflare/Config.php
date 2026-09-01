@@ -1,8 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Cloudflare;
+namespace Bambamboole\CloudflareMail\Cloudflare;
 
-use Junges\CloudflareMail\Exceptions\CloudflareTransportException;
+use Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException;
 
 /**
  * @internal This class is not part of the package's public API and may change in any release.

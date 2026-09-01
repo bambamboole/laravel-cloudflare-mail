@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Exceptions;
+namespace Bambamboole\CloudflareMail\Exceptions;
 
+use Bambamboole\CloudflareMail\Contracts\CloudflareTypes;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
-use Junges\CloudflareMail\Contracts\CloudflareTypes;
 use RuntimeException;
 use Throwable;
 

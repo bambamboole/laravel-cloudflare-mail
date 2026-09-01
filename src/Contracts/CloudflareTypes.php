@@ -1,6 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Contracts;
+namespace Bambamboole\CloudflareMail\Contracts;
 
 /**
  * Holds the array-shape definitions for the Cloudflare Email Service wire format.

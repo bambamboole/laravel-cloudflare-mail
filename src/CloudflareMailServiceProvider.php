@@ -1,14 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Providers;
+namespace Bambamboole\CloudflareMail;
 
+use Bambamboole\CloudflareMail\Cloudflare\Client;
+use Bambamboole\CloudflareMail\Cloudflare\Config as CloudflareConfig;
+use Bambamboole\CloudflareMail\Cloudflare\PayloadBuilder;
+use Bambamboole\CloudflareMail\Transport\CloudflareTransport;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
-use Junges\CloudflareMail\Cloudflare\Client;
-use Junges\CloudflareMail\Cloudflare\Config as CloudflareConfig;
-use Junges\CloudflareMail\Cloudflare\PayloadBuilder;
-use Junges\CloudflareMail\Transport\CloudflareTransport;
 
 final class CloudflareMailServiceProvider extends ServiceProvider
 {
@@ -29,7 +30,7 @@ final class CloudflareMailServiceProvider extends ServiceProvider
                     baseUrl: $config->baseUrl,
                     timeout: $config->timeout,
                 ),
-                payloadBuilder: new PayloadBuilder(),
+                payloadBuilder: new PayloadBuilder,
             );
         });
     }

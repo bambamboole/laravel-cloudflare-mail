@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Transport;
+namespace Bambamboole\CloudflareMail\Transport;
 
-use Junges\CloudflareMail\Cloudflare\Client;
-use Junges\CloudflareMail\Cloudflare\PayloadBuilder;
-use Junges\CloudflareMail\Exceptions\CloudflareTransportException;
+use Bambamboole\CloudflareMail\Cloudflare\Client;
+use Bambamboole\CloudflareMail\Cloudflare\PayloadBuilder;
+use Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\SentMessage;
 use Symfony\Component\Mailer\Transport\AbstractTransport;

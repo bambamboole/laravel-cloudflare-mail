@@ -1,20 +1,20 @@
-<?php declare(strict_types=1);
+<?php
 
-use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
+declare(strict_types=1);
+
 use Rector\Config\RectorConfig;
-use Rector\Set\ValueObject\LevelSetList;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
+use Rector\TypeDeclaration\Rector\Closure\AddClosureVoidReturnTypeWhereNoReturnRector;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
-        __DIR__.'/src',
-        __DIR__.'/tests',
+return RectorConfig::configure()
+    ->withPaths([__DIR__.'/src', __DIR__.'/tests'])
+    ->withPhpSets()
+    ->withPreparedSets(deadCode: true, codeQuality: true, typeDeclarations: true)
+    ->withSkip([
+        // Untyped Pest closures are the house style in tests/; typing every test callback
+        // is churn that adds no safety. Scoped to tests/ so src/ keeps the rule.
+        AddClosureVoidReturnTypeWhereNoReturnRector::class => [__DIR__.'/tests'],
+        // Laravel resolves many signatures by reflection — policy methods, middleware handle(),
+        // listeners, authorize(). Stripping a parameter the body ignores breaks them at runtime.
+        RemoveUnusedPublicMethodParameterRector::class,
     ]);
-
-    // register a single rule
-    $rectorConfig->rule(InlineConstructorDefaultToPropertyRector::class);
-
-    // define sets of rules
-    $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_84,
-    ]);
-};

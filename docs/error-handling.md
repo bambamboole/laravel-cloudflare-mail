@@ -1,6 +1,6 @@
 # Error handling
 
-The driver maps Cloudflare's error responses to two exception types. Code inside the package throws `Junges\CloudflareMail\Exceptions\CloudflareTransportException`. The transport rewraps that as `Symfony\Component\Mailer\Exception\TransportException` before it bubbles out, so it integrates with Laravel's queue retries and any custom mail event listeners.
+The driver maps Cloudflare's error responses to two exception types. Code inside the package throws `Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException`. The transport rewraps that as `Symfony\Component\Mailer\Exception\TransportException` before it bubbles out, so it integrates with Laravel's queue retries and any custom mail event listeners.
 
 ## Exception types
 
@@ -26,7 +26,7 @@ The `cloudflareCode` property holds the numeric Cloudflare error code (for examp
 
 ### `TransportException`
 
-Thrown by `Junges\CloudflareMail\Transport\CloudflareTransport::doSend()` when the underlying client fails. It wraps the original `CloudflareTransportException` as the `previous` cause, so you can still inspect the Cloudflare error code if you need to:
+Thrown by `Bambamboole\CloudflareMail\Transport\CloudflareTransport::doSend()` when the underlying client fails. It wraps the original `CloudflareTransportException` as the `previous` cause, so you can still inspect the Cloudflare error code if you need to:
 
 ```php
 try {
@@ -34,7 +34,7 @@ try {
 } catch (\Symfony\Component\Mailer\Exception\TransportException $e) {
     $cloudflare = $e->getPrevious();
 
-    if ($cloudflare instanceof \Junges\CloudflareMail\Exceptions\CloudflareTransportException
+    if ($cloudflare instanceof \Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException
         && $cloudflare->cloudflareCode === 10004) {
         // Cloudflare throttled the send. Schedule a retry.
     }
