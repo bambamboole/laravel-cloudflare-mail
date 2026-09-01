@@ -1,12 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Cloudflare;
+namespace Bambamboole\CloudflareMail\Cloudflare;
 
+use Bambamboole\CloudflareMail\Contracts\CloudflareTypes;
+use Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Junges\CloudflareMail\Contracts\CloudflareTypes;
-use Junges\CloudflareMail\Exceptions\CloudflareTransportException;
 use SensitiveParameter;
 
 /**

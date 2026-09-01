@@ -1,5 +1,6 @@
 {
-    "name": "mateusjunges/laravel-cloudflare-mail",
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "bambamboole/laravel-cloudflare-mail",
     "description": "Cloudflare Email Service transport for Laravel.",
     "type": "library",
     "license": "MIT",
@@ -12,68 +13,85 @@
         "email",
         "cloudflare-email-service"
     ],
-    "homepage": "https://github.com/mateusjunges/laravel-cloudflare-mail",
     "authors": [
         {
+            "name": "Manuel Christlieb",
+            "email": "manuel@christlieb.eu"
+        },
+        {
             "name": "Mateus Junges",
-            "email": "mateus@junges.dev",
-            "role": "Developer"
+            "email": "mateus@junges.dev"
         }
     ],
-    "support": {
-        "issues": "https://github.com/mateusjunges/laravel-cloudflare-mail/issues",
-        "source": "https://github.com/mateusjunges/laravel-cloudflare-mail"
-    },
     "require": {
         "php": "^8.4",
-        "illuminate/http": "^12.0|^13.0",
-        "illuminate/mail": "^12.0|^13.0",
-        "illuminate/support": "^12.0|^13.0",
-        "symfony/mailer": "^7.2|^8.0"
+        "illuminate/http": "^13.0",
+        "illuminate/mail": "^13.0",
+        "illuminate/support": "^13.0",
+        "symfony/mailer": "^8.0"
     },
     "require-dev": {
-        "laravel/pint": "^1.20",
-        "orchestra/testbench": "^10.0|^11.0",
-        "pestphp/pest": "^4.0",
-        "phpstan/phpstan": "^2.1",
+        "bambamboole/extended-testbench": "^0.6",
+        "larastan/larastan": "^3.10",
+        "laravel/pint": "^1.29",
+        "pestphp/pest": "^5.0",
+        "pestphp/pest-plugin-laravel": "^5.0",
+        "pestphp/pest-plugin-phpstan": "^5.0",
         "rector/rector": "^2.0"
-    },
-    "scripts": {
-        "phpstan": "vendor/bin/phpstan analyse",
-        "phpstan:ci": "vendor/bin/phpstan analyse --no-progress",
-        "pint": "vendor/bin/pint",
-        "pint:test": "vendor/bin/pint --test",
-        "rector": "vendor/bin/rector process",
-        "rector:dry-run": "vendor/bin/rector process --dry-run",
-        "cs": [
-            "@rector",
-            "@pint",
-            "@phpstan"
-        ],
-        "test": "vendor/bin/pest"
     },
     "autoload": {
         "psr-4": {
-            "Junges\\CloudflareMail\\": "src/"
+            "Bambamboole\\CloudflareMail\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Junges\\CloudflareMail\\Tests\\": "tests/"
+            "Bambamboole\\CloudflareMail\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "check": [
+            "pint --test",
+            "phpstan analyse",
+            "rector --dry-run",
+            "@test"
+        ],
+        "lint": "pint --format agent",
+        "stan": "phpstan analyse",
+        "test:lint": "./vendor/bin/pint --test",
+        "test": "pest",
+        "refactor": "rector",
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:purge-skeleton --ansi",
+            "@php vendor/bin/testbench package:discover --ansi"
+        ],
+        "post-install-cmd": [
+            "@boost:refresh"
+        ],
+        "post-update-cmd": [
+            "@boost:refresh"
+        ],
+        "boost:refresh": "[ -n \"$CI\" ] || [ ! -f vendor/bin/testbench ] || [ ! -f boost.json ] || { [ -f package.json ] && [ ! -d node_modules ]; } || vendor/bin/testbench boost:update --no-interaction || true",
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Junges\\CloudflareMail\\Providers\\CloudflareMailServiceProvider"
+                "Bambamboole\\CloudflareMail\\CloudflareMailServiceProvider"
+            ]
+        },
+        "extended-testbench": {
+            "check-ignore": [
+                "phpstan.neon.dist"
             ]
         }
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        },
-        "sort-packages": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

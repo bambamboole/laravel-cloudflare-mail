@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Cloudflare;
+namespace Bambamboole\CloudflareMail\Cloudflare;
 
-use Junges\CloudflareMail\Contracts\CloudflareTypes;
-use Junges\CloudflareMail\Exceptions\CloudflareTransportException;
+use Bambamboole\CloudflareMail\Contracts\CloudflareTypes;
+use Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;

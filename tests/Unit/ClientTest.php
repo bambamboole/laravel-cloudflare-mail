@@ -1,12 +1,18 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Tests\Unit;
+namespace Bambamboole\CloudflareMail\Tests\Unit;
 
+use Bambamboole\CloudflareMail\Cloudflare\Client;
+use Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException;
 use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
-use Junges\CloudflareMail\Cloudflare\Client;
-use Junges\CloudflareMail\Exceptions\CloudflareTransportException;
 
+/**
+ * @param  list<string>  $delivered
+ * @return array<string, mixed>
+ */
 function successBody(array $delivered = ['to@example.com']): array
 {
     return [
@@ -33,7 +39,7 @@ it('posts to the account-scoped endpoint with bearer auth and JSON body', functi
         'text' => 'Body',
     ]);
 
-    Http::assertSent(fn ($request) => $request->method() === 'POST'
+    Http::assertSent(fn (Request $request): bool => $request->method() === 'POST'
         && $request->url() === 'https://api.cloudflare.com/client/v4/accounts/acct-123/email/sending/send'
         && $request->header('Authorization')[0] === 'Bearer cf-token'
         && $request->header('Content-Type')[0] === 'application/json'

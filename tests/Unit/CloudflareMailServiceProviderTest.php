@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-namespace Junges\CloudflareMail\Tests\Unit;
+namespace Bambamboole\CloudflareMail\Tests\Unit;
 
+use Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException;
+use Bambamboole\CloudflareMail\Transport\CloudflareTransport;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Junges\CloudflareMail\Exceptions\CloudflareTransportException;
-use Junges\CloudflareMail\Transport\CloudflareTransport;
 use Symfony\Component\Mime\Email;
 
 function fakeAcceptedResponse(): void
@@ -73,7 +75,7 @@ it('falls back to services.cloudflare when the mailer block is bare', function (
     fakeAcceptedResponse();
     sendThroughCloudflare();
 
-    Http::assertSent(fn ($request): bool => str_contains((string) $request->url(), '/accounts/acct-from-services/')
+    Http::assertSent(fn (Request $request): bool => str_contains($request->url(), '/accounts/acct-from-services/')
         && $request->header('Authorization')[0] === 'Bearer tok-from-services');
 });
 
@@ -91,7 +93,7 @@ it('prefers credentials from the mailer block over services.cloudflare', functio
     fakeAcceptedResponse();
     sendThroughCloudflare();
 
-    Http::assertSent(fn ($request): bool => str_contains((string) $request->url(), '/accounts/acct-from-mailer/')
+    Http::assertSent(fn (Request $request): bool => str_contains($request->url(), '/accounts/acct-from-mailer/')
         && $request->header('Authorization')[0] === 'Bearer tok-from-mailer');
 });
 
@@ -106,8 +108,8 @@ it('routes requests at the base_url from the mailer config', function (): void {
     fakeAcceptedResponse();
     sendThroughCloudflare();
 
-    Http::assertSent(fn ($request): bool => str_starts_with(
-        (string) $request->url(),
+    Http::assertSent(fn (Request $request): bool => str_starts_with(
+        $request->url(),
         'https://staging.cloudflare.example/v4/accounts/acct-123/',
     ));
 });

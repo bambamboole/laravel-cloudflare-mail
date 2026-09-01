@@ -1,5 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
-use Junges\CloudflareMail\Tests\TestCase;
+use Bambamboole\CloudflareMail\Tests\TestCase;
 
-uses(TestCase::class)->in('Unit');
+uses(TestCase::class)->in('Feature', 'Unit');

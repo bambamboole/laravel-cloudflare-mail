@@ -1,9 +1,9 @@
 # Laravel Cloudflare Mail
 
-![Packagist Version](https://img.shields.io/packagist/v/mateusjunges/laravel-cloudflare-mail?label=Latest%20version%20on%20Packagist)
-![Packagist Downloads](https://img.shields.io/packagist/dt/mateusjunges/laravel-cloudflare-mail?style=flat&label=Total%20Downloads)
+![Packagist Version](https://img.shields.io/packagist/v/bambamboole/laravel-cloudflare-mail?label=Latest%20version%20on%20Packagist)
+![Packagist Downloads](https://img.shields.io/packagist/dt/bambamboole/laravel-cloudflare-mail?style=flat&label=Total%20Downloads)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
-[![Continuous Integration](https://github.com/mateusjunges/laravel-cloudflare-mail/actions/workflows/ci.yml/badge.svg)](https://github.com/mateusjunges/laravel-cloudflare-mail/actions/workflows/ci.yml)
+[![Continuous Integration](https://github.com/bambamboole/laravel-cloudflare-mail/actions/workflows/ci.yml/badge.svg)](https://github.com/bambamboole/laravel-cloudflare-mail/actions/workflows/ci.yml)
 
 ![Readme Banner](art/readme-banner.png)
 
@@ -11,12 +11,12 @@ A Laravel mail driver for [Cloudflare Email Service](https://developers.cloudfla
 
 ## Requirements
 
-PHP 8.4 or newer. Laravel 12 or 13. A Cloudflare account with a verified sender domain and an API token that has the email sending permission.
+PHP 8.4 or newer. Laravel 13. A Cloudflare account with a verified sender domain and an API token that has the email sending permission.
 
 ## Installation
 
 ```bash
-composer require mateusjunges/laravel-cloudflare-mail
+composer require bambamboole/laravel-cloudflare-mail
 ```
 
 The service provider auto registers via Laravel's package discovery. No manual registration needed.
@@ -64,7 +64,7 @@ The `docs/` folder covers each topic in more depth:
 
 ## Versioning
 
-This package follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). The public API consists of the `cloudflare` mailer configuration keys and the `Junges\CloudflareMail\Exceptions\CloudflareTransportException` class. Every other class is marked `@internal` and may change in any release, so depend only on the documented configuration and the Laravel mail abstraction.
+This package follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). The public API consists of the `cloudflare` mailer configuration keys and the `Bambamboole\CloudflareMail\Exceptions\CloudflareTransportException` class. Every other class is marked `@internal` and may change in any release, so depend only on the documented configuration and the Laravel mail abstraction.
 
 ## Testing
 
@@ -72,7 +72,7 @@ This package follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 composer test
 ```
 
-The `composer cs` script runs Rector, Pint, and PHPStan together.
+The `composer check` script runs Pint, PHPStan, Rector, and the test suite together.
 
 ## Changelog
 
@@ -80,7 +80,7 @@ See [CHANGELOG.md](CHANGELOG.md) for what has changed recently.
 
 ## Contributing
 
-Contributions are welcome. Please open an issue to discuss substantial changes before submitting a pull request, and make sure `composer test` and `composer cs` pass.
+Contributions are welcome. Please open an issue to discuss substantial changes before submitting a pull request, and make sure `composer check` passes.
 
 ## Security
 
@@ -88,8 +88,11 @@ If you discover a security vulnerability, please review [our security policy](SE
 
 ## Credits
 
-* [Mateus Junges](https://github.com/mateusjunges)
-* [All Contributors](https://github.com/mateusjunges/laravel-cloudflare-mail/contributors)
+This package is a fork of [mateusjunges/laravel-cloudflare-mail](https://github.com/mateusjunges/laravel-cloudflare-mail).
+
+* [Manuel Christlieb](https://github.com/bambamboole)
+* [Mateus Junges](https://github.com/mateusjunges) (original author)
+* [All Contributors](https://github.com/bambamboole/laravel-cloudflare-mail/contributors)
 
 ## License
 

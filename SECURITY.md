@@ -11,6 +11,6 @@ The latest stable `1.x` release receives security updates.
 
 ## Reporting a vulnerability
 
-If you discover a security vulnerability, please email mateus@junges.dev directly rather than opening a public issue. You will receive a response as soon as possible, and the issue will be addressed promptly.
+If you discover a security vulnerability, please email manuel@christlieb.eu directly rather than opening a public issue. You will receive a response as soon as possible, and the issue will be addressed promptly.
 
 Please do not disclose the vulnerability publicly until it has been resolved and a fix has been released.
