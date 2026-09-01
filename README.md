@@ -5,8 +5,6 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
 [![Continuous Integration](https://github.com/bambamboole/laravel-cloudflare-mail/actions/workflows/ci.yml/badge.svg)](https://github.com/bambamboole/laravel-cloudflare-mail/actions/workflows/ci.yml)
 
-![Readme Banner](art/readme-banner.png)
-
 A Laravel mail driver for [Cloudflare Email Service](https://developers.cloudflare.com/email-service/), the outbound email API on Cloudflare's network. Once installed and configured, every `Mail::send`, queued mailable, and notification routes through Cloudflare via Laravel's mail abstraction.
 
 ## Requirements
