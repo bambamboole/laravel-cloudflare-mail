@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0 (2026-09-01)
+
+
+### Bug Fixes
+
+* fall back to GITHUB_TOKEN when RELEASE_PLEASE_TOKEN is unset ([a8af8ef](https://github.com/bambamboole/laravel-cloudflare-mail/commit/a8af8efba525ee0a292e10dd9efeecf07b099d07))
+* require extended-testbench ^0.6.1 to match its scaffold ([0203fdb](https://github.com/bambamboole/laravel-cloudflare-mail/commit/0203fdbc2537d7f442b454089bc532b0cc2dd7ef))
+* start release-please versioning at 0.1.0 for the fork ([fe45c8e](https://github.com/bambamboole/laravel-cloudflare-mail/commit/fe45c8e8a62ebbfec9370ec1842ff7a38d7334ea))
+
 ## [1.0.0] - 2026-05-21
 
 First stable release. From this version on, the public API (the `cloudflare` mailer configuration keys and the `CloudflareTransportException` class) follows Semantic Versioning. The package's other classes are marked `@internal` and may change in any release.
